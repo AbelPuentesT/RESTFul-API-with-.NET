@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Nest;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Interfaces;
+using SocialMedia.Core.QueryFilters;
 using SocialMediaApi.Responses;
 
 namespace SocialMediaApi.Controllers
@@ -19,9 +21,9 @@ namespace SocialMediaApi.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<IActionResult> GetPosts()
+        public async Task<IActionResult> GetPosts([FromQuery]PostQueryFilters filters)
         {
-            var posts =  _postService.GetPosts();
+            var posts =  _postService.GetPosts(filters);
 
             //mapeo de entidades con automapper
             var postsDTO = _mapper.Map<IEnumerable<PostDTO>>(posts);
@@ -60,11 +62,11 @@ namespace SocialMediaApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostPost(PostDTO postDTO)
+        public async Task<IActionResult> PostPost(PostDTO postDTO, [FromQuery] PostQueryFilters filters)
         {
 
             var post = _mapper.Map<Post>(postDTO);
-            var posts =  _postService.GetPosts();
+            var posts =  _postService.GetPosts(filters);
             post.Id = posts.Count() + 1;
             //var post = new Post
             //{
