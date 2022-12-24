@@ -13,8 +13,7 @@ namespace SocialMedia.Infrastructure.Data.Configurations
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Id)
-            .HasColumnName("IdPublicacion") 
-            .ValueGeneratedNever();
+            .HasColumnName("IdPublicacion"); 
 
             builder.Property(e => e.UserId)
                 .HasColumnName("IdUsuario")

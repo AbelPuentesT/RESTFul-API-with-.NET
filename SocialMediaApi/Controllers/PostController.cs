@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Nest;
+using Newtonsoft.Json;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Interfaces;
@@ -29,6 +29,16 @@ namespace SocialMediaApi.Controllers
             var posts =  _postService.GetPosts(filters);
             var postsDTO = _mapper.Map<IEnumerable<PostDTO>>(posts);
             var response= new ApiResponse<IEnumerable<PostDTO>>(postsDTO);
+            var metadata = new
+            {
+                posts.TotalCount,
+                posts.TotalPages,
+                posts.HasNextPage,
+                posts.HasPreviousPage,
+                posts.CurrentPage,
+                posts.PageSize
+            };
+            Response.Headers.Add("X-Pagination",JsonConvert.SerializeObject(metadata));
             return Ok(response);
         }
 
@@ -42,15 +52,13 @@ namespace SocialMediaApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostPost(PostDTO postDTO, [FromQuery] PostQueryFilters filters)
+        public async Task<IActionResult> PostPost(PostDTO postDTO)
         {
             var post = _mapper.Map<Post>(postDTO);
-            var posts =  _postService.GetPosts(filters);
-            post.Id = posts.Count() + 1;
             await _postService.InsertPost(post);
             var postDto = _mapper.Map<PostDTO>(post);
             var response = new ApiResponse<PostDTO>(postDto);
-            return Ok(response);
+            return Ok(postDto);
         }
         [HttpPut]
         public async Task<IActionResult> PutPost(int id, PostDTO postDTO)

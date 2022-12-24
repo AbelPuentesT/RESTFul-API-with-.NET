@@ -1,4 +1,5 @@
-﻿using SocialMedia.Core.Entities;
+﻿using SocialMedia.Core.CustomEntities;
+using SocialMedia.Core.Entities;
 using SocialMedia.Core.Exceptions;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.QueryFilters;
@@ -8,9 +9,7 @@ namespace SocialMedia.Core.Services
     public class PostService : IPostService
     {
         private readonly IUnitOfWork _unitOfWork;
-        //private readonly IRepository<Post> _postRepository;
-        //private readonly IRepository<User> _userRepository;
-        //private readonly IRepository<Comment> _commentRepository;
+        
         public PostService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -21,7 +20,7 @@ namespace SocialMedia.Core.Services
             return await _unitOfWork.PostRepository.GetById(id);
         }
 
-        public IEnumerable<Post> GetPosts(PostQueryFilters filters)
+        public PagedList<Post> GetPosts(PostQueryFilters filters)
         {
             var posts= _unitOfWork.PostRepository.GetAll();
             if (filters.UserId != null)
@@ -36,7 +35,8 @@ namespace SocialMedia.Core.Services
             {
                 posts = posts.Where(x => x.Description.ToLower().Contains(filters.Description.ToLower()));
             }
-            return posts;
+            var pagedPosts = PagedList<Post>.Create(posts, filters.PageNumber, filters.PageSize);
+            return pagedPosts;
         }
 
         public async Task InsertPost(Post post)
