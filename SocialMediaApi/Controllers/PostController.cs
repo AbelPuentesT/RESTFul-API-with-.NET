@@ -6,6 +6,7 @@ using SocialMedia.Core.Entities;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.QueryFilters;
 using SocialMediaApi.Responses;
+using System.Net;
 
 namespace SocialMediaApi.Controllers
 {
@@ -21,60 +22,31 @@ namespace SocialMediaApi.Controllers
             _mapper = mapper;
         }
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetPosts([FromQuery]PostQueryFilters filters)
         {
             var posts =  _postService.GetPosts(filters);
-
-            //mapeo de entidades con automapper
             var postsDTO = _mapper.Map<IEnumerable<PostDTO>>(posts);
-
-            //Mapeo manual de entidades
-            //var postsDTO = posts.Select(x => new PostDTO
-            //{
-            //    PostId = x.PostId,
-            //    UserId = x.UserId,
-            //    Date =x.Date,
-            //    Description = x.Description,
-            //    Image = x.Image
-            //});
-
-            return Ok(postsDTO);
+            var response= new ApiResponse<IEnumerable<PostDTO>>(postsDTO);
+            return Ok(response);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost(int id)
         {
             var post =  await _postService.GetPost(id);
-
-            //mapeo de entidades con automapper
             var postDTO = _mapper.Map<PostDTO>(post);
-
-            //Mapeo manual de entidades
-            //var postDTO = new PostDTO { 
-            //    PostId = post.PostId, 
-            //    UserId = post.UserId, 
-            //    Date= post.Date, 
-            //    Description= post.Description,
-            //    Image= post.Image
-            //};
-
-            return Ok(postDTO);
+            var response = new ApiResponse<PostDTO>(postDTO);
+            return Ok(response);
         }
 
         [HttpPost]
         public async Task<IActionResult> PostPost(PostDTO postDTO, [FromQuery] PostQueryFilters filters)
         {
-
             var post = _mapper.Map<Post>(postDTO);
             var posts =  _postService.GetPosts(filters);
             post.Id = posts.Count() + 1;
-            //var post = new Post
-            //{
-            //    UserId = postDTO.UserId,
-            //    Date = postDTO.Date,
-            //    Description = postDTO.Description,
-            //    Image = postDTO.Image
-            //};
             await _postService.InsertPost(post);
             var postDto = _mapper.Map<PostDTO>(post);
             var response = new ApiResponse<PostDTO>(postDto);
@@ -85,14 +57,16 @@ namespace SocialMediaApi.Controllers
         {
             var post = _mapper.Map<Post>(postDTO);
             post.Id = id;
-            _postService.UpdatePost(post);
-            return Ok();
+            var result = await _postService.UpdatePost(post);
+            var response= new ApiResponse<bool>(result);
+            return Ok(response);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(int id)
         {
-            await _postService.DeletePost(id);
-            return Ok();
+            var result=await _postService.DeletePost(id);
+            var response= new ApiResponse<bool>(result);
+            return Ok(response);
         }
 
     }
