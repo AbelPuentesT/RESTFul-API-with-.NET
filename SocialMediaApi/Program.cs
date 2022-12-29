@@ -11,7 +11,6 @@ using SocialMedia.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<PaginationOptions>(builder.Configuration.GetSection("Pagination"));
 // Add services to the container.
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
@@ -22,6 +21,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
     //options.SuppressModelStateInvalidFilter = true;
 });
+builder.Services.Configure<PaginationOptions>(builder.Configuration.GetSection("Pagination"));
 
 builder.Services.AddMvc(options =>
 {

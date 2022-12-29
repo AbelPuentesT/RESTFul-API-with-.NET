@@ -25,8 +25,13 @@ namespace SocialMediaApi.Controllers
             _mapper = mapper;
             _uriService = uriService;
         }
+        /// <summary>
+        /// Return all posts
+        /// </summary>
+        /// <param name="filters">filters to apply</param>
+        /// <returns></returns>
         [HttpGet(Name =nameof(GetPosts))]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type=typeof(ApiResponse<IEnumerable<PostDTO>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetPosts([FromQuery]PostQueryFilters filters)
         {
