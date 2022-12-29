@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "kw8u10B8moiy0Qb82DBg94XgyV8c5ZKzjrUjHamimwJdkPK+617LPAppD2FmqM56Ms31uY9EMMeDsQHlaF1Cqg==",
+  "dgSpecHash": "z035EpWn9Os+5JqNku4bqzsMfyotYiHVSyVpDcnJ8PK6ubDkcPgD49DVxpQ68qoj97jE14236NRhIDwcDrg+Cw==",
   "success": true,
   "projectFilePath": "D:\\VisualStudio\\BlazorServerApp_ViusalStudio\\SocialMediaApi\\SocialMedia.Core\\SocialMedia.Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\puent\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\puent\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
+    "C:\\Users\\puent\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\puent\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
