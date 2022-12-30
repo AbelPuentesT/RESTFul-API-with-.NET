@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XqSb8db28U9YrtWWC3/Gz+Hhz5Fva5Q9KsXw0uwIhyqPJi19CZH3In6gH8lsOem6wTNYyKByaHDHfKuh1+t6iw==",
+  "dgSpecHash": "AvUvrKzas1tjviPpDVWVLaZv37itAXvkLRuSvJLdJwj85fQ74pAHFyA2QE0UVZ3jm2VSKzfMLF7/T/UvJggB0A==",
   "success": true,
   "projectFilePath": "D:\\VisualStudio\\BlazorServerApp_ViusalStudio\\SocialMediaApi\\SocialMediaApi\\SocialMediaApi.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\puent\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
     "C:\\Users\\puent\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "C:\\Users\\puent\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\puent\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.12\\microsoft.aspnetcore.authentication.jwtbearer.6.0.12.nupkg.sha512",
     "C:\\Users\\puent\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.0\\microsoft.aspnetcore.jsonpatch.6.0.0.nupkg.sha512",
     "C:\\Users\\puent\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.0\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.0.nupkg.sha512",
     "C:\\Users\\puent\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

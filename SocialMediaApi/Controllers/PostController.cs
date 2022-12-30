@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SocialMedia.Core.CustomEntities;
@@ -12,6 +13,7 @@ using System.Net;
 
 namespace SocialMediaApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase

@@ -1,5 +1,8 @@
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Nest;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.Data;
 using SocialMedia.Core.Interfaces;
@@ -8,6 +11,7 @@ using SocialMedia.Infrastructure.Filters;
 using SocialMedia.Infrastructure.Interfaces;
 using SocialMedia.Infrastructure.Repositories;
 using SocialMedia.Infrastructure.Services;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +27,24 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 });
 builder.Services.Configure<PaginationOptions>(builder.Configuration.GetSection("Pagination"));
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer= true,
+        ValidateAudience= true,
+        ValidateLifetime= true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer= builder.Configuration["Authentication:Isser"],
+        ValidAudience = builder.Configuration["Authentication:Audience"],
+        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Authentication:SecretKey"]))
+    };
+})
+    ;
 builder.Services.AddMvc(options =>
 {
     options.Filters.Add<ValidationFilter>();
@@ -30,12 +52,17 @@ builder.Services.AddMvc(options =>
 {
     options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 });
+
 builder.Services.AddControllers(options => options.Filters.Add<GlobalExceptionFilters>());
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddTransient<IPostService, PostService>();
+
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 //builder.Services.AddSingleton<IUriService, UriService>();
 builder.Services.AddSingleton<IUriService>(provider =>
@@ -46,11 +73,10 @@ builder.Services.AddSingleton<IUriService>(provider =>
     return new UriService(absoluteUri);
 });
 builder.Services.AddScoped(typeof(SocialMedia.Core.Interfaces.IRepository<>),typeof(BaseRepository<>));
+
 builder.Services.AddDbContext<SocialMediaContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("SocialMedia")));
 //builder.Services.Configure<PaginationOptions>(Configuration.GetSection("Pagination"));
-
-
 
 var app = builder.Build();
 
@@ -63,6 +89,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
