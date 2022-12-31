@@ -2,13 +2,13 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Nest;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.Data;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.Services;
 using SocialMedia.Infrastructure.Filters;
 using SocialMedia.Infrastructure.Interfaces;
+using SocialMedia.Infrastructure.Options;
 using SocialMedia.Infrastructure.Repositories;
 using SocialMedia.Infrastructure.Services;
 using System.Text;
@@ -25,7 +25,10 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
     //options.SuppressModelStateInvalidFilter = true;
 });
+
 builder.Services.Configure<PaginationOptions>(builder.Configuration.GetSection("Pagination"));
+
+builder.Services.Configure<PasswordsOptions>(builder.Configuration.GetSection("PasswordOptions"));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -43,8 +46,8 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["Authentication:Audience"],
         IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Authentication:SecretKey"]))
     };
-})
-    ;
+});
+
 builder.Services.AddMvc(options =>
 {
     options.Filters.Add<ValidationFilter>();
@@ -62,6 +65,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IPostService, PostService>();
+
 builder.Services.AddTransient<ISecurityService, SecurityService>();
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
