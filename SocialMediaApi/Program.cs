@@ -62,6 +62,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IPostService, PostService>();
+builder.Services.AddTransient<ISecurityService, SecurityService>();
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 //builder.Services.AddSingleton<IUriService, UriService>();
@@ -84,7 +85,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        //options.SwaggerEndpoint("/swagger/v1/swagger.json", "Social Media Api V1.0.1");
+        //options.RoutePrefix =string.Empty;
+    });
 }
 
 app.UseHttpsRedirection();

@@ -1,9 +1,4 @@
 ﻿using SocialMedia.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialMedia.Core.Interfaces
 {
@@ -12,6 +7,7 @@ namespace SocialMedia.Core.Interfaces
         IPostRepository PostRepository { get; }
         IRepository<User> UserRepository { get; }
         IRepository<Comment> CommentRepository { get; }
+        ISecurityRepository SecurityRepository { get; } 
         void SaveChanges();
         Task SaveChangesAsync();
     }

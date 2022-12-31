@@ -1,0 +1,17 @@
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\bin\Release\net6.0\SocialMedia.Infrastructure.deps.json
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\bin\Release\net6.0\SocialMedia.Infrastructure.runtimeconfig.json
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\bin\Release\net6.0\SocialMedia.Infrastructure.dll
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\bin\Release\net6.0\SocialMedia.Infrastructure.pdb
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\bin\Release\net6.0\SocialMedia.Core.dll
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\bin\Release\net6.0\SocialMedia.Core.pdb
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\SocialMedia.Infrastructure.csproj.AssemblyReference.cache
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\SocialMedia.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\SocialMedia.Infrastructure.AssemblyInfoInputs.cache
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\SocialMedia.Infrastructure.AssemblyInfo.cs
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\SocialMedia.Infrastructure.csproj.CoreCompileInputs.cache
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\SocialMedia.Infrastructure.csproj.CopyComplete
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\SocialMedia.Infrastructure.dll
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\refint\SocialMedia.Infrastructure.dll
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\SocialMedia.Infrastructure.pdb
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\SocialMedia.Infrastructure.genruntimeconfig.cache
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMedia.Infrastructure\obj\Release\net6.0\ref\SocialMedia.Infrastructure.dll

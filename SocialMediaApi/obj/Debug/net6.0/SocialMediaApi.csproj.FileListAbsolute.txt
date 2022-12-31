@@ -101,3 +101,4 @@ D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMediaApi\obj\D
 D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMediaApi\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.SocialMediaApi.props
 D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMediaApi\obj\Debug\net6.0\staticwebassets.pack.json
 D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMediaApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\VisualStudio\BlazorServerApp_ViusalStudio\SocialMediaApi\SocialMediaApi\bin\Debug\net6.0\web.config
