@@ -30,31 +30,7 @@ builder.Services.Configure<PaginationOptions>(builder.Configuration.GetSection("
 
 builder.Services.Configure<PasswordsOptions>(builder.Configuration.GetSection("PasswordOptions"));
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer= true,
-        ValidateAudience= true,
-        ValidateLifetime= true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer= builder.Configuration["Authentication:Isser"],
-        ValidAudience = builder.Configuration["Authentication:Audience"],
-        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Authentication:SecretKey"]))
-    };
-});
-
-builder.Services.AddMvc(options =>
-{
-    options.Filters.Add<ValidationFilter>();
-}).AddFluentValidation(options =>
-{
-    options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-});
+builder.Services.AddSingleton<IPasswordService, PasswordService>() ;
 
 builder.Services.AddControllers(options => options.Filters.Add<GlobalExceptionFilters>());
 
@@ -82,6 +58,32 @@ builder.Services.AddScoped(typeof(SocialMedia.Core.Interfaces.IRepository<>),typ
 builder.Services.AddDbContext<SocialMediaContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("SocialMedia")));
 //builder.Services.Configure<PaginationOptions>(Configuration.GetSection("Pagination"));
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Authentication:Isser"],
+        ValidAudience = builder.Configuration["Authentication:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Authentication:SecretKey"]))
+    };
+});
+
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add<ValidationFilter>();
+}).AddFluentValidation(options =>
+{
+    options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+});
 
 var app = builder.Build();
 

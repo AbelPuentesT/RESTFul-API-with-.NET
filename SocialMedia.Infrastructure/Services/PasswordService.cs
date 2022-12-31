@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace SocialMedia.Infrastructure.Services
 {
-    public class PasswordService : IPasswordHasher
+    public class PasswordService : IPasswordService
     {
         private readonly PasswordsOptions _Options;
         public PasswordService(IOptions<PasswordsOptions> options)
@@ -15,7 +15,23 @@ namespace SocialMedia.Infrastructure.Services
         }
         public bool Check(string hash, string password)
         {
-            throw new NotImplementedException();
+            var parts = hash.Split('.');
+            if (parts.Length != 3)
+            {
+                throw new ArgumentException("Unexpected hash format");
+            }
+            var iterations = Convert.ToInt32(parts[0]);
+            var salt = Convert.FromBase64String(parts[1]);
+            var key = Convert.FromBase64String(parts[2]);
+            using (var algorithm = new Rfc2898DeriveBytes(
+                password,
+                salt,
+                iterations)
+                )
+            {
+                var keyToCheck = (algorithm.GetBytes(_Options.KeySize));
+                return keyToCheck.SequenceEqual(key);
+            }
         }
 
         public string Hash(string password)
@@ -28,7 +44,7 @@ namespace SocialMedia.Infrastructure.Services
             {
                 var key = Convert.ToBase64String(algorithm.GetBytes(_Options.KeySize));
                 var salt = Convert.ToBase64String(algorithm.Salt);
-                return $"{_Options.Iterations}.{salt}.{key}";
+                return $"{_Options.Iterations}.{salt}.{key}"; 
             }
         }
     }
